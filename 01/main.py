@@ -4,19 +4,29 @@ import pipeLine_Correios
 import pipeLine_RelatUX
 import pipeLine_CadastroP
 import pipeLine_ExtratoPedi
+import database
+
+#Config DataBase Postgres
+HOST = 'localhost'
+PORT = '5432'
+DBNAME = 'DataBase_Ecomprei'
+USER = 'accesspipeline'
+PASSWORD = 'Pedro0445'
+
+
 
 def main():
-    directory_exit_CORREIOS = 'C:/Users/pedro.carvalho/Desktop/arquivo_pipelineEx_correios.xlsx'
-    pipeLine_Correios.generate_all_correios().to_excel(directory_exit_CORREIOS, index=False)
+    conn = database.connect_to_postgres(HOST,PORT,DBNAME,USER,PASSWORD)
 
-    directory_exit_UX = 'C:/Users/pedro.carvalho/Desktop/arquivo_pipelineEx_UX.xlsx'
-    pipeLine_RelatUX.generate_all_relatUX().to_excel(directory_exit_UX, index=False)
+    database.insert_into_postgres(conn,'Fat_Correios', pipeLine_Correios.generate_all_correios())
 
-    directory_exit_CadProd = 'C:/Users/pedro.carvalho/Desktop/arquivo_pipelineEx_CadProd.xlsx'
-    pipeLine_CadastroP.generate_cadProd().to_excel(directory_exit_CadProd, index=False)
+    # database.insert_into_postgres(conn,'Ux_tracking', pipeLine_RelatUX.generate_all_relatUX())
 
-    directory_exit_ExtratPed = 'C:/Users/pedro.carvalho/Desktop/arquivo_pipelineEx_ExtratPed.xlsx'
-    pipeLine_ExtratoPedi.generate_all_ExtratPed().to_excel(directory_exit_ExtratPed, index=False)
+    # database.insert_into_postgres(conn,'Cad_products', pipeLine_CadastroP.generate_cadProd())
+
+    # database.insert_into_postgres(conn,'ExtractPed', pipeLine_ExtratoPedi.generate_all_ExtratPed())
+
+    conn.close()
 
 if __name__ == "__main__":
     main()

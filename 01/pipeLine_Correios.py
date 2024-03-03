@@ -9,5 +9,11 @@ def generate_all_correios():
 
 
 def etl_correios(all_correios_df):
+        
         desired_columns_Correios = ['Etiqueta','Valor do Servico']
-        return all_correios_df[desired_columns_Correios]
+        renamed_columns_Correios = {'Valor do Servico': 'Valor_servico'}
+
+        all_correios_df['Etiqueta'] = all_correios_df['Etiqueta'].astype(str)
+        all_correios_df['Valor do Servico'] =  all_correios_df['Valor do Servico'].str.replace('R$','').str.replace(',','.').astype(float).round(2)
+
+        return all_correios_df[desired_columns_Correios].rename(columns=renamed_columns_Correios)
