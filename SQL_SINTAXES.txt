@@ -1,0 +1,32 @@
+#Create da tabela de produtos#
+
+CREATE TABLE IF NOT EXISTS Cad_Products (
+SKU INT,
+Nome VARCHAR(255),
+Departamento VARCHAR(8),
+Setor VARCHAR(50),
+Familia VARCHAR(80),
+SubFamilia VARCHAR(15)
+)
+
+#Create Table para Relatorio UX
+
+CREATE TABLE IF NOT EXISTS Relat_Ux (
+CodEntrega INTEGER,
+Sro VARCHAR(15)
+)
+
+#Create Table Extrat_Pedidos
+
+CREATE TABLE IF NOT EXISTS Extrat_Ped
+(
+Entrega INT,
+Data_emissao DATE,
+Vl_Mercadoria DECIMAL,
+Vl_Frete_Cliente DECIMAL,
+Vl_Total DECIMAL,
+Vl_Meio DECIMAL,
+Ult_Ponto VARCHAR(5),
+SKU INT,
+Qtd_Fat INT
+)

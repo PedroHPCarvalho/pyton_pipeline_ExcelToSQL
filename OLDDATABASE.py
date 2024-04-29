@@ -1,6 +1,6 @@
 import psycopg2
 
-class DataConnection:
+class DataConection:
     def __init__(self,host,port,dbname,user,password) -> None:
         self.host = host
         self.port = port
@@ -11,16 +11,16 @@ class DataConnection:
     def connect_to_postgres(self):
         try:
             self.conn = psycopg2.connect(
-                host=self.host,
-                port=self.port,
-                dbname=self.dbname,
-                user=self.user,
-                password=self.password
+                self.host,
+                self.port,
+                self.dbname,
+                self.user,
+                self.password
             )
             print("Conexão bem-sucedida ao banco de dados Postgres")
             return self.conn
         except Exception as e:
-            print("Erro ao conectar ao banco de dados Postgres", e)
+            print(r"Erro ao conectar ao banco de dados Postgres")
 
     def closeConnection(self):
         if self.conn is not None:
